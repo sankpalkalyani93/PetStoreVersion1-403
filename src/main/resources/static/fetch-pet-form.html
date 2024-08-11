@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>FetchPetForm</title>
+	</head>
+	<body>
+		<h2>Fetch Pet By Id</h2>
+		<form id="fetch-pet-form">
+			<label for="pet-id">Pet Id:</label> <br>
+			<input type="number" id="pet-id" name="pet-id" required><br>
+			<button type="submit">Fetch Pet</button>
+		</form>
+		
+		<div id="fetched-pet">
+		
+		</div>
+		
+		<script>
+		
+			// fetching the pet by id
+		function fetchPetById(id){
+			fetch(`/api/pets/${id}`)
+			.then(response => response.json())
+				.then(data => {
+					
+					let fetchedPetDiv = document.getElementById('fetched-pet');
+					fetchedPetDiv.innerHTML = '';
+					if(data){
+						let petDetails = document.createElement('div');
+						petDetails.innerHTML = `
+							<h3>Pet Information </h3>
+							<p>Pet Name : ${data.name}</p>
+							<p>Pet Description : ${data.description}</p>
+							<p>Pet Age: ${data.age} </p>
+							<p>Pet Price: ${data.price}</p>
+						`;
+						
+						fetchedPetDiv.appendChild(petDetails);
+						//alert(`Pet found : ${data.name}`);
+					}
+					else{
+						//alert("Pet not found...!");
+						fetchedPetDiv.textContent = 'Pet Not Found';
+					}
+				})
+				.catch(error => console.log(error));
+		}
+		
+		document.getElementById('fetch-pet-form').addEventListener('submit', function (event){
+			event.preventDefault();
+			
+			let petId = document.getElementById('pet-id').value;
+			fetchPetById(petId);
+		});
+		</script>
+	</body>
+</html>

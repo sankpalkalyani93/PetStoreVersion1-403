@@ -1,12 +1,11 @@
 package com.example.PetStoreVersion1;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Pet {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +14,6 @@ public class Pet {
 	private String name;
 	
 	private String description;
-	
-	private int age;
 	
 	private double price;
 
@@ -44,14 +41,6 @@ public class Pet {
 		this.description = description;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -59,6 +48,5 @@ public class Pet {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
 	
 }

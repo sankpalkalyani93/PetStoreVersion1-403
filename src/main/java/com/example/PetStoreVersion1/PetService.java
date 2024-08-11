@@ -11,25 +11,17 @@ public class PetService {
 	
 	@Autowired
 	private PetRepository petRepository;
-
-	public Pet createPet(Pet pet) {
-		return petRepository.save(pet);
-	}
 	
-	public List<Pet> getAllPets(){
+	public List<Pet> getAllPets() {
 		return petRepository.findAll();
 	}
 	
-	public Optional<Pet> getPetById(Long id){
-		return petRepository.findById(id);
+	public Pet savePet(Pet pet) {
+		return petRepository.save(pet);
 	}
 	
-	public Pet updatePet(Long id, Pet updatePet) {
-		updatePet.setId(id);
-		return petRepository.save(updatePet);
-	}
-	
-	public void deletePet(Long id) {
-		petRepository.deleteById(id);
+	// method to fetch a pet by id
+	public Pet getPetById(Long id) {
+		return petRepository.findById(id).orElse(null);
 	}
 }
